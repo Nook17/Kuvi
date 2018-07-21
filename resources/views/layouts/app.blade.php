@@ -85,5 +85,6 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://unpkg.com/ionicons@4.2.4/dist/ionicons.js"></script>
 </body>
 </html>

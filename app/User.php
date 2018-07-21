@@ -39,4 +39,8 @@ class User extends Authenticatable
  {
   return $this->friendsOfOther->merge($this->friendsOfMine);
  }
+ public function posts()
+ {
+  return $this->hasMany('Social\Post')->orderBy('created_at', 'DESC');
+ }
 }

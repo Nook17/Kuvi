@@ -5,7 +5,6 @@ namespace Social\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use Social\Post;
 use Social\User;
 
 class UsersController extends Controller
@@ -18,8 +17,8 @@ class UsersController extends Controller
  public function show($id)
  {
   $user  = User::find($id);
-  $posts = Post::where('user_id', $id)->get();
-  return view('users.show', compact('user'));
+  $posts = $user->posts()->get();
+  return view('users.show', compact('user', 'posts'));
  }
 
  public function edit($id)

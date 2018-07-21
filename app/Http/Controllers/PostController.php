@@ -5,6 +5,7 @@ namespace Social\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Social\Post;
+use Social\User;
 
 class PostController extends Controller
 {
@@ -22,9 +23,11 @@ class PostController extends Controller
   return back();
  }
 
- public function show(Post $post)
+ public function show($id)
  {
-  //
+  $post = Post::findOrFail($id);
+  $user = User::find($id);
+  return view('/posts.show', compact('post', 'user'));
  }
 
  public function edit(Post $post)
