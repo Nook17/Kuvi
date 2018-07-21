@@ -10,10 +10,16 @@ class PostController extends Controller
 {
  public function store(Request $request)
  {
+  $this->validate($request, [
+   'post_content' => 'required|min:5',
+  ]);
+
   $post          = new Post;
   $post->content = $request->post_content;
   $post->user_id = Auth::id();
   $post->save();
+
+  return back();
  }
 
  public function show(Post $post)
