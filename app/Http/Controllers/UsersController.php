@@ -9,10 +9,10 @@ use Social\User;
 
 class UsersController extends Controller
 {
- // public function __construct()
- // {
- //     $this->middleware('permission');
- // }
+ public function __construct()
+ {
+  $this->middleware('user_permission', ['except' => ['show']]);
+ }
 
  public function show($id)
  {
@@ -23,20 +23,12 @@ class UsersController extends Controller
 
  public function edit($id)
  {
-  if ($id != Auth::id()) {
-   abort(403, 'Brak dostępu');
-  }
-
   $user = Auth::user(); // $user = User::find($id); -> TO SAMO
   return view('users.edit', compact('user'));
  }
 
  public function update(Request $request, $id)
  {
-  if ($id != Auth::id()) {
-   abort(403, 'Brak dostępu');
-  }
-
   $this->validate($request, [
    'name'   => 'required|string|min:4|max:255',
    'gender' => 'required|string',
@@ -63,6 +55,7 @@ class UsersController extends Controller
 
   $user->save();
 
-  return view('users.show', compact('user'));
+  $posts = $user->posts()->get();
+  return view('users.show', compact('user', 'posts'));
  }
 }

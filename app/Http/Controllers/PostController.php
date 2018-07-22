@@ -9,6 +9,11 @@ use Social\User;
 
 class PostController extends Controller
 {
+ public function __construct()
+ {
+  $this->middleware('post_permission', ['except' => ['show', 'store']]);
+ }
+
  public function store(Request $request)
  {
   $this->validate($request, [
@@ -30,18 +35,30 @@ class PostController extends Controller
   return view('/posts.show', compact('post', 'user'));
  }
 
- public function edit(Post $post)
+ public function edit($id)
  {
-  //
+  $post = Post::findOrFail($id);
+  return view('posts.edit', compact('post'));
  }
 
- public function update(Request $request, Post $post)
+ public function update(Request $request, $id)
  {
-  //
+  $this->validate($request, [
+   'post_content' => 'required|min:5',
+  ]);
+
+  $post          = Post::find($id);
+  $post->content = $request->post_content;
+  $post->save();
+
+  $user = User::find($id);
+
+  return view('/posts.show', compact('post', 'user'));
  }
 
- public function destroy(Post $post)
+ public function destroy($id)
  {
-  //
+  Post::where(['id' => $id])->delete();
+  return back();
  }
 }

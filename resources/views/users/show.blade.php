@@ -5,7 +5,7 @@
   @include('layouts.sidebar')
   <div class="col-md-8">
    
-   @if(Auth::check())
+   @if(Auth::check() && $user->id == Auth::id())
     @include('posts.create')
    @endif
    
