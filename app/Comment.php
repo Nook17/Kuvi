@@ -10,5 +10,8 @@ class Comment extends Model
  use SoftDeletes;
  protected $dates = ['deleted_at'];
 
- //
+ public function user()
+ {
+  return $this->belongsTo('Social\User');
+ }
 }

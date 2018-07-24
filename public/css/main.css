@@ -6,3 +6,8 @@ body {
   background-attachment: fixed;
   /* background-size: cover; */
 }
+.card .n_comment {
+  border-radius: 1.2rem;
+  background-color: #e9ebee;
+  border: 1px solid rgba(100, 100, 100, 0.1);
+}

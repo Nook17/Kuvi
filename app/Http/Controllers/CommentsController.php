@@ -21,6 +21,8 @@ class CommentsController extends Controller
   $comment->user_id = Auth::id();
   $comment->content = $request->$comment_content_id;
   $comment->save();
+
+  return back();
  }
 
  public function edit($id)

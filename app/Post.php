@@ -20,4 +20,9 @@ class Post extends Model
  {
   return $this->belongsTo('Social\User');
  }
+
+ public function comments()
+ {
+  return $this->hasMany('Social\Comment');
+ }
 }

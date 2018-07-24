@@ -33,8 +33,14 @@
  <div class="card-body" id="post_{{ $post->id }}">
   <p class="card-text">{{ $post->content }}</p>
  </div>
+
  <hr>
+ @foreach($post->comments as $comment)
+  @include('comments.show')
+ @endforeach
+ 
  @if(Auth::check())
   @include('comments.create')
  @endif
+
 </div>
