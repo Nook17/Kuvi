@@ -9,10 +9,17 @@
     @include('posts.create')
    @endif
    
-   @foreach($posts as $post)
-    @include('posts.single')
-   @endforeach
-
+   @if($posts->count() > 0)
+    @foreach($posts as $post)
+     @include('posts.single')
+    @endforeach
+   @else
+   <div class="card bg-light mt-3">
+     <div class="card-header">
+      <h4 class="text-center">The user has no posts</h4>
+     </div>
+   </div>
+   @endif
   </div>
  </div>
 </div>

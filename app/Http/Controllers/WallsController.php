@@ -6,26 +6,15 @@ use Illuminate\Support\Facades\Auth;
 use Social\Post;
 use Social\User;
 
-class HomeController extends Controller
+class WallsController extends Controller
 {
- /**
-  * Create a new controller instance.
-  *
-  * @return void
-  */
  public function __construct()
  {
   $this->middleware('auth');
  }
 
- /**
-  * Show the application dashboard.
-  *
-  * @return \Illuminate\Http\Response
-  */
  public function index()
  {
-
   $friends = Auth::user()->friends();
 
   $friends_ids_array   = [];
@@ -40,9 +29,9 @@ class HomeController extends Controller
    ->paginate(10);
 
   $user = User::find(Auth::id());
-  return view('walls.index', compact('posts', 'user'));
 
-  // return view('walls.index', compact('user'));
-  // return redirect()->route('walls', compact('user'));
+  return view('walls.index', compact('posts', 'user'));
  }
 }
+// var_dump($friend);
+// exit;

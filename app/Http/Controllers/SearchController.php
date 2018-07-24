@@ -3,6 +3,7 @@
 namespace Social\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Social\User;
 
 class SearchController extends Controller
@@ -13,6 +14,7 @@ class SearchController extends Controller
   $search_phrase = $request->q;
   $search_result = User::where('name', 'like', '%' . $search_phrase . '%')->paginate(6);
 
-  return view('/search.users', compact('search_result'));
+  $user = User::find(Auth::id());
+  return view('/search.users', compact('search_result', 'user'));
  }
 }

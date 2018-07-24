@@ -26,3 +26,4 @@ Route::post('/friends/{friend}', 'FriendsController@add');
 Route::patch('/friends/{friend}', 'FriendsController@accept');
 Route::delete('/friends/{friend}', 'FriendsController@destroy');
 Route::resource('/posts', 'PostController', ['except' => ['index', 'create']]);
+Route::get('/wall', 'WallsController@index')->name('walls');

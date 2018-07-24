@@ -13,7 +13,9 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                background-image: url(/assets/img/tree_1920.jpg);
+                background-position: center center;
+                background-size: cover;
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
@@ -79,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Social
+                    {{-- Social --}}
                 </div>
 
                 <div class="links">

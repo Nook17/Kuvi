@@ -38,7 +38,8 @@ class PostController extends Controller
  public function edit($id)
  {
   $post = Post::findOrFail($id);
-  return view('posts.edit', compact('post'));
+  $user = User::find(Auth::id());
+  return view('posts.edit', compact('post', 'user'));
  }
 
  public function update(Request $request, $id)
@@ -51,7 +52,7 @@ class PostController extends Controller
   $post->content = $request->post_content;
   $post->save();
 
-  $user = User::find($id);
+  $user = User::find(Auth::id());
 
   return view('/posts.show', compact('post', 'user'));
  }
