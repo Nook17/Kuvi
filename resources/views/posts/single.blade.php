@@ -33,4 +33,8 @@
  <div class="card-body" id="post_{{ $post->id }}">
   <p class="card-text">{{ $post->content }}</p>
  </div>
+ <hr>
+ @if(Auth::check())
+  @include('comments.create')
+ @endif
 </div>
