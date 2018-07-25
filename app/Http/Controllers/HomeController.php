@@ -35,14 +35,13 @@ class HomeController extends Controller
    $friends_ids_array[] = $friend->id;
   }
 
-  $posts = Post::whereIn('user_id', $friends_ids_array)
+  $posts = Post::with('comments.user')
+   ->whereIn('user_id', $friends_ids_array)
    ->orderBy('created_at', 'DESC')
    ->paginate(10);
 
   $user = User::find(Auth::id());
-  return view('walls.index', compact('posts', 'user'));
 
-  // return view('walls.index', compact('user'));
-  // return redirect()->route('walls', compact('user'));
+  return view('walls.index', compact('posts', 'user'));
  }
 }

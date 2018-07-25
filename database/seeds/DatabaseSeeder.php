@@ -12,9 +12,10 @@ class DatabaseSeeder extends Seeder
 
   /* ====================== VARIABLES ====================== */
 
-  $number_of_user      = 20;
-  $max_postss_per_user = 20;
-  $password            = 'nook1771';
+  $number_of_user        = 20;
+  $max_posts_per_user    = 20;
+  $max_comments_per_post = 5;
+  $password              = 'nook1771';
 
   /* ======================== USERS ======================== */
 
@@ -73,7 +74,7 @@ class DatabaseSeeder extends Seeder
 
    /* ======================== POSTS ======================== */
 
-   for ($post_id = 1; $post_id <= $faker->numberBetween($min = 0, $max = $max_postss_per_user); $post_id++) {
+   for ($post_id = 1; $post_id <= $faker->numberBetween($min = 0, $max = $max_posts_per_user); $post_id++) {
     DB::table('posts')->insert([
      'user_id'    => $user_id,
      'content'    => $faker->paragraph($nbSenteces = 1, $variableNbSenteces = true),
@@ -82,6 +83,14 @@ class DatabaseSeeder extends Seeder
 
     /* ======================== COMMENTS ======================== */
 
+    for ($comment_id = 1; $comment_id <= $faker->numberBetween($min = 0, $max = $max_comments_per_post); $comment_id++) {
+     DB::table('comments')->insert([
+      'post_id'    => $faker->numberBetween($min = 0, $max = $number_of_user * 10),
+      'user_id'    => $faker->numberBetween($min = 0, $max = $number_of_user),
+      'content'    => $faker->paragraph($nbSenteces = 1, $variableNbSenteces = true),
+      'created_at' => $faker->dateTimeThisYear($max = 'now'),
+     ]);
+    } // FOR COMMENTS
    } // FOR POSTS
   } // FOR USERS
  } // function run()

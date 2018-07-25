@@ -5,6 +5,7 @@ namespace Social\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Social\Post;
 use Social\User;
 
 class UsersController extends Controller
@@ -16,8 +17,9 @@ class UsersController extends Controller
 
  public function show($id)
  {
-  $user  = User::find($id);
-  $posts = $user->posts()->get();
+  $user = User::find($id);
+  // $posts = $user->posts()->get(); // Niewydajne rozwiązanie
+  $posts = Post::with('comments.user')->where('user_id', $id)->orderBy('created_at', 'DESC')->get(); // Eager Loading (optymalizacja zapytań do bazy)
   return view('users.show', compact('user', 'posts'));
  }
 
@@ -54,8 +56,8 @@ class UsersController extends Controller
   }
 
   $user->save();
-
   $posts = $user->posts()->get();
+
   return view('users.show', compact('user', 'posts'));
  }
 }

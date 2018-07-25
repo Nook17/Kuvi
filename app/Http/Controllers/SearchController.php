@@ -10,7 +10,6 @@ class SearchController extends Controller
 {
  public function users(Request $request)
  {
-
   $search_phrase = $request->q;
   $search_result = User::where('name', 'like', '%' . $search_phrase . '%')->paginate(6);
 

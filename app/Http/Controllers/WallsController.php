@@ -15,8 +15,8 @@ class WallsController extends Controller
 
  public function index()
  {
-  $friends = Auth::user()->friends();
-
+  $friends             = Auth::user()->friends();
+  $user                = User::find(Auth::id());
   $friends_ids_array   = [];
   $friends_ids_array[] = Auth::id();
 
@@ -24,14 +24,11 @@ class WallsController extends Controller
    $friends_ids_array[] = $friend->id;
   }
 
-  $posts = Post::whereIn('user_id', $friends_ids_array)
+  $posts = Post::with('comments.user')
+   ->whereIn('user_id', $friends_ids_array)
    ->orderBy('created_at', 'DESC')
    ->paginate(10);
-
-  $user = User::find(Auth::id());
 
   return view('walls.index', compact('posts', 'user'));
  }
 }
-// var_dump($friend);
-// exit;

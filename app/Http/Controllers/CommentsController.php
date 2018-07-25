@@ -5,7 +5,6 @@ namespace Social\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Social\Comment;
-use Social\Post;
 use Social\User;
 
 class CommentsController extends Controller
@@ -48,9 +47,6 @@ class CommentsController extends Controller
   $comment          = Comment::find($id);
   $comment->content = $request->comment_content;
   $comment->save();
-
-  $user = User::find(Auth::id());
-  $post = Post::findOrFail($id);
 
   return back();
  }
