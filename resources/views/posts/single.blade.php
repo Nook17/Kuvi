@@ -34,9 +34,8 @@
   <p class="card-text">{{ $post->content }}</p>
  </div>
 
- <hr>
  @foreach($post->comments as $comment)
-  @include('comments.show')
+  @include('comments.single')
  @endforeach
  
  @if(Auth::check())

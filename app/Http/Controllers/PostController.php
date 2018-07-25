@@ -32,7 +32,7 @@ class PostController extends Controller
  {
   $post = Post::findOrFail($id);
   $user = User::find($id);
-  return view('/posts.show', compact('post', 'user'));
+  return view('posts.show', compact('post', 'user'));
  }
 
  public function edit($id)
@@ -54,7 +54,7 @@ class PostController extends Controller
 
   $user = User::find(Auth::id());
 
-  return view('/posts.show', compact('post', 'user'));
+  return view('posts.show', compact('post', 'user'));
  }
 
  public function destroy($id)

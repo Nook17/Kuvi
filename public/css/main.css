@@ -11,3 +11,9 @@ body {
   background-color: #e9ebee;
   border: 1px solid rgba(100, 100, 100, 0.1);
 }
+.n_button_delete {
+  cursor: pointer;
+}
+.n_dropdown {
+  cursor: pointer;
+}
