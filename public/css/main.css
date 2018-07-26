@@ -17,3 +17,10 @@ body {
 .n_dropdown {
   cursor: pointer;
 }
+.trashed {
+  opacity: 0.4;
+  transition: all 0.5s;
+}
+.trashed:hover {
+  opacity: 1;
+}

@@ -18,8 +18,21 @@ class UsersController extends Controller
  public function show($id)
  {
   $user = User::find($id);
-  // $posts = $user->posts()->get(); // Niewydajne rozwiązanie
-  $posts = Post::with('comments.user')->where('user_id', $id)->orderBy('created_at', 'DESC')->get(); // Eager Loading (optymalizacja zapytań do bazy)
+  // $posts = $user->posts()->get();   // Niewydajne rozwiązanie
+
+  if (is_admin()) {
+   $posts = Post::with('comments.user') // Eager Loading (optymalizacja zapytań do bazy)
+    ->where('user_id', $id)
+    ->withTrashed()
+    ->orderBy('created_at', 'DESC')
+    ->paginate(10);
+  } else {
+   $posts = Post::with('comments.user')
+    ->where('user_id', $id)
+    ->orderBy('created_at', 'DESC')
+    ->paginate(10);
+  }
+
   return view('users.show', compact('user', 'posts'));
  }
 

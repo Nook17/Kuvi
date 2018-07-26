@@ -22,7 +22,7 @@ class CommentPermission
    'user_id' => Auth::id(),
   ])->exists();
 
-  if (!Auth::check() || !$comment_exists) {
+  if ((!Auth::check() || !$comment_exists) && !is_admin()) {
    abort(403, 'Brak dostępu');
   }
   return $next($request);

@@ -18,11 +18,15 @@ class Post extends Model
 
  public function user()
  {
-  return $this->belongsTo('Social\User');
+  return $this->belongsTo('Social\User', 'user_id');
  }
 
  public function comments()
  {
-  return $this->hasMany('Social\Comment');
+  if (is_admin()) {
+   return $this->hasMany('Social\Comment')->withTrashed();
+  } else {
+   return $this->hasMany('Social\Comment');
+  }
  }
 }

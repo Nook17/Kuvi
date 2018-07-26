@@ -14,8 +14,20 @@ class DatabaseSeeder extends Seeder
 
   $number_of_user        = 20;
   $max_posts_per_user    = 20;
-  $max_comments_per_post = 5;
+  $max_comments_per_post = 3;
   $password              = 'nook1771';
+
+  /* ======================== USERS ======================== */
+
+  DB::table('roles')->insert([
+   'id'   => '1',
+   'type' => 'admin',
+  ]);
+
+  DB::table('roles')->insert([
+   'id'   => '2',
+   'type' => 'user',
+  ]);
 
   /* ======================== USERS ======================== */
 
@@ -26,6 +38,7 @@ class DatabaseSeeder extends Seeder
      'name'     => 'Arek Demko',
      'email'    => 'arek@nook17.pl',
      'gender'   => 'm',
+     'role_id'  => 1,
      'password' => bcrypt($password),
     ]);
    }
@@ -44,6 +57,7 @@ class DatabaseSeeder extends Seeder
     'name'       => $name,
     'email'      => str_replace('-', '', str_slug($name)) . '@' . $faker->freeEmailDomain,
     'gender'     => $gender,
+    'role_id'    => 2,
     'avatar'     => $avatar,
     'password'   => bcrypt('nook1771'),
     'created_at' => $faker->dateTimeThisYear($max = 'now'),
@@ -85,8 +99,8 @@ class DatabaseSeeder extends Seeder
 
     for ($comment_id = 1; $comment_id <= $faker->numberBetween($min = 0, $max = $max_comments_per_post); $comment_id++) {
      DB::table('comments')->insert([
-      'post_id'    => $faker->numberBetween($min = 0, $max = $number_of_user * 10),
-      'user_id'    => $faker->numberBetween($min = 0, $max = $number_of_user),
+      'post_id'    => $post_id,
+      'user_id'    => $faker->numberBetween($min = 1, $max = $number_of_user),
       'content'    => $faker->paragraph($nbSenteces = 1, $variableNbSenteces = true),
       'created_at' => $faker->dateTimeThisYear($max = 'now'),
      ]);

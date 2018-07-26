@@ -30,15 +30,27 @@ class PostController extends Controller
 
  public function show($id)
  {
-  $post = Post::findOrFail($id);
   $user = User::find($id);
+
+  if (is_admin()) {
+   $post = Post::findOrFail($id)->withTrashed();
+  } else {
+   $post = Post::findOrFail($id);
+  }
+
   return view('posts.show', compact('post', 'user'));
  }
 
  public function edit($id)
  {
-  $post = Post::findOrFail($id);
   $user = User::find(Auth::id());
+
+  if (is_admin()) {
+   $post = Post::findOrFail($id)->withTrashed();
+  } else {
+   $post = Post::findOrFail($id);
+  }
+
   return view('posts.edit', compact('post', 'user'));
  }
 
@@ -59,7 +71,10 @@ class PostController extends Controller
 
  public function destroy($id)
  {
-  Post::where(['id' => $id])->delete();
+  $post = Post::find($id);
+  $post->delete();
+  $post->comments()->delete();
+
   return back();
  }
 }

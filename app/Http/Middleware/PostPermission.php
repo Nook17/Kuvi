@@ -22,7 +22,7 @@ class PostPermission
    'user_id' => Auth::id(),
   ])->exists();
 
-  if (!Auth::check() || !$post_exists) {
+  if ((!Auth::check() || !$post_exists) && !is_admin()) {
    abort(403, 'Brak dostępu');
   }
   return $next($request);
