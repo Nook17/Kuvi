@@ -22,12 +22,16 @@ class UsersController extends Controller
 
   if (is_admin()) {
    $posts = Post::with('comments.user') // Eager Loading (optymalizacja zapytań do bazy)
+    ->with('likes')
+    ->with('comments.likes')
     ->where('user_id', $id)
     ->withTrashed()
     ->orderBy('created_at', 'DESC')
     ->paginate(10);
   } else {
    $posts = Post::with('comments.user')
+    ->with('likes')
+    ->with('comments.likes')
     ->where('user_id', $id)
     ->orderBy('created_at', 'DESC')
     ->paginate(10);

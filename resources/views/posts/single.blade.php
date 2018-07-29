@@ -34,6 +34,8 @@
   <p class="card-text">{{ $post->content }}</p>
  </div>
 
+ @include('posts.likes')
+
  @foreach($post->comments as $comment)
   @include('comments.single')
  @endforeach

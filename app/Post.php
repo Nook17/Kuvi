@@ -29,4 +29,9 @@ class Post extends Model
    return $this->hasMany('Social\Comment');
   }
  }
+
+ public function likes()
+ {
+  return $this->hasMany('Social\Like');
+ }
 }

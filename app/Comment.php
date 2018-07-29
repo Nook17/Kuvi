@@ -14,4 +14,9 @@ class Comment extends Model
  {
   return $this->belongsTo('Social\User');
  }
+
+ public function likes()
+ {
+  return $this->hasMany('Social\Like');
+ }
 }

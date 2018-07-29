@@ -28,3 +28,5 @@ Route::delete('/friends/{friend}', 'FriendsController@destroy');
 Route::resource('/posts', 'PostController', ['except' => ['index', 'create']]);
 Route::get('/wall', 'WallsController@index')->name('walls');
 Route::resource('/comments', 'CommentsController', ['except' => ['index', 'create', 'show']]);
+Route::post('/likes', 'LikeController@add');
+Route::delete('likes', 'LikeController@destroy');

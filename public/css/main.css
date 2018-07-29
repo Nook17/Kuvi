@@ -24,3 +24,19 @@ body {
 .trashed:hover {
   opacity: 1;
 }
+.n_btn_like_post {
+  background-color: transparent;
+  transition: all 0.5s;
+}
+.n_btn_like_post:hover {
+  text-shadow: 0px 0px 3px rgba(36, 44, 155, 0.582);
+}
+.n_btn_like_comment {
+  background-color: transparent;
+  margin-left: 4.5rem;
+  margin-top: -2rem;
+  transition: all 0.5s;
+}
+.n_btn_like_comment:hover {
+  text-shadow: 0px 0px 3px rgba(36, 44, 155, 0.582);
+}

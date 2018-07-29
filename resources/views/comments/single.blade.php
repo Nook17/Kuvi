@@ -26,12 +26,15 @@
      <p class="card-text"><strong><a href="{{ url('/users/' . $comment->user['id']) }}">{{ $comment->user['name'] }} </a></strong>{{ $comment->content }}</p>
     </div>
    </div>
-
+   
    {{-- @if(Auth::check() && $comment->user_id == Auth::id()) --}}
    @if(belongs_to_auth($comment->user_id) || is_admin())
-    @include('comments.dropdown_menu')
-   @endif 
+   @include('comments.dropdown_menu')
+   @endif
+   
+  </div> {{-- div.media --}}
 
-  </div>
+  @include('comments.likes')
+
  </div>
 </div>

@@ -35,10 +35,22 @@ class HomeController extends Controller
    $friends_ids_array[] = $friend->id;
   }
 
-  $posts = Post::with('comments.user')
-   ->whereIn('user_id', $friends_ids_array)
-   ->orderBy('created_at', 'DESC')
-   ->paginate(10);
+  if (is_admin()) {
+   $posts = Post::with('comments.user')
+    ->with('likes')
+    ->with('comments.likes')
+    ->whereIn('user_id', $friends_ids_array)
+    ->orderBy('created_at', 'DESC')
+    ->withTrashed()
+    ->paginate(10);
+  } else {
+   $posts = Post::with('comments.user')
+    ->with('likes')
+    ->with('comments.likes')
+    ->whereIn('user_id', $friends_ids_array)
+    ->orderBy('created_at', 'DESC')
+    ->paginate(10);
+  }
 
   $user = User::find(Auth::id());
 

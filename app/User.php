@@ -51,4 +51,10 @@ class User extends Authenticatable
  {
   return $this->belongsTo('Social\Role');
  }
+
+ public function likes()
+ {
+  return $this->hasMany('Social\Like');
+ }
+
 }
