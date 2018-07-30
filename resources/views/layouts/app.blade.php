@@ -75,6 +75,8 @@
                             </li>
                         @else
                             <a href="{{ url('/users/' . Auth::user()->id . '/friends') }}" class="mr-sm-4"><ion-icon size="large" name="contacts" title="Friends"></ion-icon><span class="badge badge-pill badge-info">{{ Auth::user()->friends()->count() }}</span></a>
+                            <a href="{{ url('/notifications') }}" class="mr-sm-4"><ion-icon size="large" name="globe" title="Notifications"></ion-icon><?= Auth::user()->unreadNotifications->count() > 0 ? '<span class="badge badge-pill badge-danger">' . Auth::user()->unreadNotifications->count() . '</span>' : ''?></a>
+                            
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{-- {{ Auth::user()->name }} <span class="caret"></span> --}}

@@ -30,3 +30,5 @@ Route::get('/wall', 'WallsController@index')->name('walls');
 Route::resource('/comments', 'CommentsController', ['except' => ['index', 'create', 'show']]);
 Route::post('/likes', 'LikeController@add');
 Route::delete('likes', 'LikeController@destroy');
+Route::get('/notifications', 'NotificationsController@index');
+Route::patch('/notifications/{notification}', 'NotificationsController@update');
