@@ -5,6 +5,7 @@ namespace Social\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class FriendRequest extends Notification
 {
@@ -55,7 +56,7 @@ class FriendRequest extends Notification
  public function toArray($notifiable)
  {
   return [
-   'message' => 'Message from Friends',
+   'message' => 'You have a new friend suggestion: <a href="' . url('users/' . Auth::id()) . '">' . Auth::user()->name . '</a>',
   ];
  }
 }

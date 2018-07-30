@@ -43,3 +43,11 @@ body {
 .n_btn_group_icon {
   background-color: transparent;
 }
+.n_notification {
+  border: 1px solid #d7d7d7;
+  text-align: left;
+  border-radius: 0.5rem;
+  padding: 10px 0 10px 10px;
+}
+.n_icon_notificatin {
+}
