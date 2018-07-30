@@ -4,7 +4,9 @@ namespace Social\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Social\Friend;
-use Social\Notifications\FriendRequest;
+use Social\Notifications\FriendRequestAccepted;
+use Social\Notifications\FriendRequestDestroy;
+use Social\Notifications\FriendRequestSent;
 use Social\User;
 
 class FriendsController extends Controller
@@ -24,7 +26,7 @@ class FriendsController extends Controller
    $friend->friend_id = $friend_id;
    $friend->save();
 
-   User::findOrFail($friend_id)->notify(new FriendRequest());
+   User::findOrFail($friend_id)->notify(new FriendRequestSent());
 
   } else {
    $this->accept($friend_id);
@@ -41,6 +43,8 @@ class FriendsController extends Controller
    'accepted' => 1,
   ]);
 
+  User::findOrFail($friend_id)->notify(new FriendRequestAccepted());
+
   return back();
  }
 
@@ -53,6 +57,8 @@ class FriendsController extends Controller
    'user_id'   => $friend_id,
    'friend_id' => Auth::id(),
   ])->delete();
+
+  User::findOrFail($friend_id)->notify(new FriendRequestDestroy());
 
   return back();
  }

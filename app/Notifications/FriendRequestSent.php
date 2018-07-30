@@ -7,7 +7,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 
-class FriendRequest extends Notification
+class FriendRequestSent extends Notification
 {
  use Queueable;
 
