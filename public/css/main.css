@@ -49,5 +49,9 @@ body {
   border-radius: 0.5rem;
   padding: 10px 0 10px 10px;
 }
-.n_icon_notificatin {
+.highlight {
+  transition: all 1s;
+}
+.highlightYellow {
+  background-color: rgba(255, 255, 0, 0.3);
 }

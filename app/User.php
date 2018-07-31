@@ -45,7 +45,8 @@ class User extends Authenticatable
  public function posts()
  {
   if (is_admin()) {
-   return $this->hasMany('Social\Post')->orderBy('created_at', 'DESC')->withTrashed();
+   // return $this->hasMany('Social\Post')->orderBy('created_at', 'DESC')->withTrashed();
+   return $this->hasMany('Social\Post')->orderBy('created_at', 'DESC');
   } else {
    return $this->hasMany('Social\Post')->orderBy('created_at', 'DESC');
   }

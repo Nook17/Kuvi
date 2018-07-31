@@ -33,11 +33,11 @@ class PostController extends Controller
   $user = User::find($id);
   // $user = User::find(Auth::id());
 
-  // if (is_admin()) {
-  //  $post = Post::findOrFail($id)->withTrashed()->get();
-  // } else {
-  $post = Post::findOrFail($id);
-  // }
+  if (is_admin()) {
+   $post = Post::withTrashed()->where('id', $id)->first();
+  } else {
+   $post = Post::findOrFail($id);
+  }
 
   return view('posts.show', compact('post', 'user'));
  }
@@ -47,7 +47,7 @@ class PostController extends Controller
   $user = User::find(Auth::id());
 
   if (is_admin()) {
-   $post = Post::findOrFail($id)->withTrashed();
+   $post = Post::withTrashed()->where('id', $id)->first();
   } else {
    $post = Post::findOrFail($id);
   }

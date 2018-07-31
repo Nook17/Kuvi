@@ -23,6 +23,9 @@
 
    <div class="card mb-3 ml-md-2 n_comment">
     <div class="card-body">
+
+     <a href="{{ url('/posts/' . $post->id . '#comment_id' . $comment->id) }}" class="text-muted pull-right"><small><ion-icon name="alarm"></ion-icon>  {{ $post->created_at }}</small></a>
+
      <p class="card-text"><strong><a href="{{ url('/users/' . $comment->user['id']) }}">{{ $comment->user['name'] }} </a></strong>{{ $comment->content }}</p>
     </div>
    </div>
@@ -38,3 +41,24 @@
 
  </div>
 </div>
+
+@section('footer')
+<script>
+	$(function(){
+
+		function addHighlightClass() {
+			let hash = window.location.hash.substring(1);
+			let comment = document.getElementById(hash);
+			let $comment = $(comment).addClass('highlight highlightYellow');
+			setTimeout(function(){
+				$comment.removeClass('highlightYellow');
+			}, 1500);
+		} addHighlightClass();
+
+		window.addEventListener('hashchange', function(){
+			addHighlightClass();
+		}, false);
+
+	});
+</script>
+@endsection
