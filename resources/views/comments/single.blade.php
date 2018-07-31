@@ -6,7 +6,7 @@
 @endif
 
 <div class="row">
- <div class="col-md-11 {{ $comment->trashed() ? ' trashed' : '' }}">
+ <div id="comment_id{{ $comment->id }}" class="col-md-11 {{ $comment->trashed() ? ' trashed' : '' }}">
   <div class="media">
 
    <div class="ml-md-2">

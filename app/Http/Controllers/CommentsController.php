@@ -5,6 +5,8 @@ namespace Social\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Social\Comment;
+use Social\Notifications\PostCommented;
+use Social\Post;
 use Social\User;
 
 class CommentsController extends Controller
@@ -16,6 +18,7 @@ class CommentsController extends Controller
 
  public function store(Request $request)
  {
+  $post               = Post::findOrFail($request->post_id);
   $comment_content_id = 'post_' . $request->post_id . '_comment_content';
 
   $this->validate($request, [
@@ -27,6 +30,10 @@ class CommentsController extends Controller
   $comment->user_id = Auth::id();
   $comment->content = $request->$comment_content_id;
   $comment->save();
+
+  if ($post->user_id != Auth::id()) {
+   User::findOrFail($post->user_id)->notify(new PostCommented($request->post_id, $comment->id));
+  }
 
   return back();
  }

@@ -83,7 +83,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('/users/' . $user->id . '/edit' ) }}"><ion-icon name="settings"></ion-icon> {{ __('Settings') }}</a>
+                                    <a class="dropdown-item" href="{{ url('/users/' . Auth::id() . '/edit' ) }}"><ion-icon name="settings"></ion-icon> {{ __('Settings') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             <ion-icon name="log-out"></ion-icon> {{ __('Logout') }}
                                     </a>

@@ -30,7 +30,7 @@
    </div>
   </div>
  </div>
- <div class="card-body" id="post_{{ $post->id }}">
+ <div class="card-body" id="post_id{{ $post->id }}">
   <p class="card-text">{{ $post->content }}</p>
  </div>
 
