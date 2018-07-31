@@ -31,7 +31,7 @@ class Liked extends Notification
   */
  public function via($notifiable)
  {
-  return ['database'];
+  return ['mail', 'database'];
  }
 
  /**
@@ -42,9 +42,19 @@ class Liked extends Notification
   */
  public function toMail($notifiable)
  {
+
+  if (is_null($this->content['comment'])) {
+   $link = 'posts/' . $this->content['post']->id;
+   $line = Auth::user()->name . ' likes Your post';
+
+  } else {
+   $link = 'posts/' . $this->content['post']->id . '#comment_id' . $this->content['comment']->id;
+   $line = Auth::user()->name . ' likes Your comment';
+  }
+
   return (new MailMessage)
-   ->line('The introduction to the notification.')
-   ->action('Notification Action', 'https://laravel.com')
+   ->line($line)
+   ->action('Notification Action', url($link))
    ->line('Thank you for using our application!');
  }
 

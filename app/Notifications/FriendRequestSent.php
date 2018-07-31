@@ -29,8 +29,7 @@ class FriendRequestSent extends Notification
   */
  public function via($notifiable)
  {
-//   return ['mail', 'database'];
-  return ['database'];
+  return ['mail', 'database'];
  }
 
  /**
@@ -41,9 +40,11 @@ class FriendRequestSent extends Notification
   */
  public function toMail($notifiable)
  {
+  $line = 'You have a new friend suggestion: ' . Auth::user()->name;
+
   return (new MailMessage)
-   ->line('The introduction to the notification.')
-   ->action('Notification Action', url('/'))
+   ->line($line)
+   ->action('Notification Action', url('users/' . Auth::id()))
    ->line('Thank you for using our application!');
  }
 

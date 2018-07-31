@@ -33,7 +33,7 @@ class PostCommented extends Notification
   */
  public function via($notifiable)
  {
-  return ['database'];
+  return ['mail', 'database'];
  }
 
  /**
@@ -44,9 +44,11 @@ class PostCommented extends Notification
   */
  public function toMail($notifiable)
  {
+  $line = Auth::user()->name . ' Commented Your post';
+
   return (new MailMessage)
-   ->line('The introduction to the notification.')
-   ->action('Notification Action', url('/'))
+   ->line($line)
+   ->action('Notification Action', url('/posts/' . $this->post_id . '#comment_id' . $this->comment_id))
    ->line('Thank you for using our application!');
  }
 

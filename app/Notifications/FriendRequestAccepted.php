@@ -29,7 +29,7 @@ class FriendRequestAccepted extends Notification
   */
  public function via($notifiable)
  {
-  return ['database'];
+  return ['mail', 'database'];
  }
 
  /**
@@ -40,9 +40,11 @@ class FriendRequestAccepted extends Notification
   */
  public function toMail($notifiable)
  {
+  $line = Auth::user()->name . ' accepted your invitation to friends';
+
   return (new MailMessage)
-   ->line('The introduction to the notification.')
-   ->action('Notification Action', url('/'))
+   ->line($line)
+   ->action('Notification Action', url('users/' . Auth::id()))
    ->line('Thank you for using our application!');
  }
 
